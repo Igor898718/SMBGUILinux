@@ -1,0 +1,53 @@
+#!/bin/python3
+import os
+from tkinter import ttk
+from tkinter import *
+from tkinter.filedialog import askopenfilename, askdirectory
+
+window=Tk()
+window.resizable=True
+window.title("Samba network folder add")
+window.geometry('400x400+700+200')
+mountdir=""
+def choosedir():
+    global mountdir
+    mountdir=askdirectory()
+    
+
+def mount():
+    ipv=ip.get()
+    namev=name.get()
+    usernamev=username.get()
+    passwv=passw.get()
+    command=f"pkexec mount -t cifs -o username={usernamev},password={passwv} //{ipv}/{namev} {mountdir}"
+    os.system(command)
+
+ip=Entry()
+name=Entry()
+username=Entry()
+passw=Entry()
+
+ipl=Label(text="Enter netpath IP")
+namel=Label(text="Enter netpath name")
+usernamel=Label(text="Enter your netpath username")
+passwl=Label(text="Enter your netpath password")
+
+choosemountpoint=Button(text="Choose mountpoint", command=choosedir)
+mount=Button(text="Mount netfolder", command=mount)
+
+ip.place(relx=0.0, rely=0.05)
+name.place(relx=0.0, rely=0.15)
+username.place(relx=0.0, rely=0.25)
+passw.place(relx=0.0, rely=0.35)
+
+ipl.place(relx=0.0, rely=0.0)
+namel.place(relx=0.0, rely=0.1)
+usernamel.place(relx=0.0, rely=0.2)
+passwl.place(relx=0.0, rely=0.3)
+
+choosemountpoint.place(relx=0.0, rely=0.55)
+mount.place(relx=0.0, rely=0.45)
+
+
+
+window.mainloop()
