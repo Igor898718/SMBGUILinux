@@ -21,6 +21,20 @@ def mount():
     passwv=passw.get()
     command=f"pkexec mount -t cifs -o username={usernamev},password={passwv} //{ipv}/{namev} {mountdir}"
     os.system(command)
+    file=open("fstab.txt", "w")
+    file.write("asdf\n")
+    file.close()
+    os.system("cat /etc/fstab > fstab.txt")
+    file2=open("fstab.txt", "r")
+    fstabtext=file2.read()
+    if fstabtext.find(f"{usernamev}@{ipv}:{namev} {mountdir} cifs username={usernamev},password={passwv} 0 0")==-1:
+        command2=f'echo "{usernamev}@{ipv}:{namev} {mountdir} cifs username={usernamev},password={passwv} 0 0" | pkexec tee /etc/fstab > /dev/null'
+        os.system(command2)
+    else:
+        warn = Toplevel(window)
+        warn.geometry("200x200+900+400")
+        warn.title("Already in automount")
+        wl=Label(text="Folder already in /etc/fstab (already automounting)")
 
 ip=Entry()
 name=Entry()
