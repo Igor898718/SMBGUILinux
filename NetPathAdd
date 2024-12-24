@@ -35,6 +35,7 @@ def mount():
         warn.geometry("200x200+900+400")
         warn.title("Already in automount")
         wl=Label(text="Folder already in /etc/fstab (already automounting)")
+        wl.place(relx=0.5, rely=0.5)
 
 ip=Entry()
 name=Entry()
