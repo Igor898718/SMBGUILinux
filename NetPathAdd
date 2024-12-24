@@ -28,7 +28,7 @@ def mount():
     file2=open("fstab.txt", "r")
     fstabtext=file2.read()
     if fstabtext.find(f"{usernamev}@{ipv}:{namev} {mountdir} cifs username={usernamev},password={passwv} 0 0")==-1:
-        command2=f'echo "{usernamev}@{ipv}:{namev} {mountdir} cifs username={usernamev},password={passwv} 0 0" | pkexec tee /etc/fstab > /dev/null'
+        command2=f'echo "{usernamev}@{ipv}:{namev} {mountdir} cifs username={usernamev},password={passwv} 0 0" | pkexec tee -a /etc/fstab > /dev/null'
         os.system(command2)
     else:
         warn = Toplevel(window)
